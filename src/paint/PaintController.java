@@ -4,6 +4,7 @@ package paint;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -131,7 +132,13 @@ public class PaintController
 		//読込ファイルダイアログ
 		File file = fileChooser.showOpenDialog(stage);
 		if(file != null) {
-			Image img = new Image(file.toURI().toString());
+			Image img = null;;
+			try {
+				img = new Image(file.toURI().toURL().toString());
+			} catch (MalformedURLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 
 			graphicsContext.drawImage(img, 500, 350);
 			graphicsContext.drawImage(img, 500, 350, 500, 350);
