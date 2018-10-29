@@ -12,7 +12,7 @@
 <?import javafx.collections.FXCollections ?>
 <?import java.lang.String ?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0"
 	prefWidth="507.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="paint.PaintController">

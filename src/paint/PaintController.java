@@ -23,6 +23,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
@@ -37,6 +38,8 @@ import javafx.stage.Stage;
 public class PaintController
 		implements Initializable {
 	@FXML
+	StackPane rootPane;
+	@FXML
 	Canvas canvas;
 	@FXML
 	ColorPicker color;
@@ -50,6 +53,8 @@ public class PaintController
 	//サイズ選択
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		canvas.widthProperty().bind(rootPane.widthProperty());
+		canvas.heightProperty().bind(rootPane.heightProperty());
 		graphicsContext = canvas.getGraphicsContext2D();
 		canvas.setStyle("-fx-background-color: white");
 		graphicsContext.setFill(Color.WHITE);
@@ -103,7 +108,6 @@ public class PaintController
 
 		//拡張子フィルター
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("All Files", "*.*"),
 				new FileChooser.ExtensionFilter("png files (*.png)", "*.png"),
 				new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg"),
 				new FileChooser.ExtensionFilter("gif files (*.gif)", "*.gif"));
