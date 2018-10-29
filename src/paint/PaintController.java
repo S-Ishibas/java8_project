@@ -54,8 +54,8 @@ public class PaintController
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		graphicsContext = canvas.getGraphicsContext2D();
-//		canvas.setStyle("-fx-background-color: white");
-//		graphicsContext.setFill(Color.WHITE);
+		canvas.setStyle("-fx-background-color: white");
+		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(0, 0, rect.getWidth() / 2 + 50,
 				rect.getHeight() / 2 + 300);
 		canvas.widthProperty().bind(rootPane.widthProperty());
