@@ -53,13 +53,13 @@ public class PaintController
 	//サイズ選択
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		canvas.widthProperty().bind(rootPane.widthProperty());
-		canvas.heightProperty().bind(rootPane.heightProperty());
 		graphicsContext = canvas.getGraphicsContext2D();
-		canvas.setStyle("-fx-background-color: white");
-		graphicsContext.setFill(Color.WHITE);
+//		canvas.setStyle("-fx-background-color: white");
+//		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(0, 0, rect.getWidth() / 2 + 50,
 				rect.getHeight() / 2 + 300);
+		canvas.widthProperty().bind(rootPane.widthProperty());
+		canvas.heightProperty().bind(rootPane.heightProperty());
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				(MouseEvent event) -> {
 					graphicsContext.beginPath();
@@ -145,7 +145,6 @@ public class PaintController
 			}
 
 			graphicsContext.drawImage(img, 500, 350);
-			graphicsContext.drawImage(img, 500, 350, 500, 350);
 
 		}
 
