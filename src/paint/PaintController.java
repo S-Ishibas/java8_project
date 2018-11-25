@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
@@ -40,7 +39,7 @@ public class PaintController
 	@FXML
 	StackPane rootPane;
 	@FXML
-	Canvas canvas;
+	ResizableCanvas canvas;
 	@FXML
 	ColorPicker color;
 	@FXML
@@ -53,11 +52,7 @@ public class PaintController
 	//サイズ選択
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		graphicsContext = canvas.getGraphicsContext2D();
-		canvas.setStyle("-fx-background-color: white");
-		graphicsContext.setFill(Color.WHITE);
-		graphicsContext.fillRect(0, 0, rect.getWidth() / 2 + 50,
-				rect.getHeight() / 2 + 300);
+
 		canvas.widthProperty().bind(rootPane.widthProperty());
 		canvas.heightProperty().bind(rootPane.heightProperty());
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
@@ -105,7 +100,6 @@ public class PaintController
 	protected void saveAction(ActionEvent event) {
 		Stage stage = new Stage();
 		FileChooser fileChooser = new FileChooser();
-
 		//拡張子フィルター
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("png files (*.png)", "*.png"),
@@ -135,12 +129,12 @@ public class PaintController
 
 		//読込ファイルダイアログ
 		File file = fileChooser.showOpenDialog(stage);
-		if(file != null) {
-			Image img = null;;
+		if (file != null) {
+			Image img = null;
+			;
 			try {
 				img = new Image(file.toURI().toURL().toString());
 			} catch (MalformedURLException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 
@@ -159,8 +153,8 @@ public class PaintController
 	//色選択
 	@FXML
 	protected void colorAction(ActionEvent event) {
-		Color newColor = color.getValue();
-		graphicsContext.setStroke(newColor);
+		//		Color newColor = color.getValue();
+		//		graphicsContext.setStroke(newColor);
 	}
 
 }
