@@ -153,8 +153,8 @@ public class PaintController
 	//色選択
 	@FXML
 	protected void colorAction(ActionEvent event) {
-		//		Color newColor = color.getValue();
-		//		graphicsContext.setStroke(newColor);
+		Color newColor = color.getValue();
+		graphicsContext.setStroke(newColor);
 	}
 
 }
