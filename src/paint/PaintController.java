@@ -52,7 +52,7 @@ public class PaintController
 	//サイズ選択
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		graphicsContext = canvas.getGraphicsContext2D();
 		canvas.widthProperty().bind(rootPane.widthProperty());
 		canvas.heightProperty().bind(rootPane.heightProperty());
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,

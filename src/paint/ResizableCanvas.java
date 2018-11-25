@@ -12,6 +12,15 @@ import javafx.scene.paint.Color;
  *
  */
 public class ResizableCanvas extends Canvas {
+	private static ResizableCanvas instance = getInstance();
+
+	public static ResizableCanvas getInstance() {
+		if(instance == null) {
+			instance = new ResizableCanvas();
+		}
+		return instance;
+	}
+
 	public ResizableCanvas() {
 		// Redraw canvas when size changes.
 		widthProperty().addListener(evt -> draw());
