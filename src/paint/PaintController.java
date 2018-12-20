@@ -15,17 +15,17 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -33,28 +33,28 @@ import javafx.stage.Stage;
  *
  * @author 石橋 宗一郎
  * @version 1.0
+ * @param <WidthProperty>
  */
-public class PaintController
+public class PaintController<WidthProperty>
 		implements Initializable {
 	@FXML
 	StackPane rootPane;
 	@FXML
-	ResizableCanvas canvas;
+	AnchorPane anchorPane;
+	@FXML
+	Canvas canvas;
 	@FXML
 	ColorPicker color;
 	@FXML
 	ChoiceBox<String> sizeChooser;
-	Screen screen = Screen.getPrimary();
-	Rectangle2D rect = screen
-			.getVisualBounds();
 	GraphicsContext graphicsContext;
 
-	//サイズ選択
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		canvas.setStyle("-fx-background-color: white");
 		graphicsContext = canvas.getGraphicsContext2D();
-		canvas.widthProperty().bind(rootPane.widthProperty());
-		canvas.heightProperty().bind(rootPane.heightProperty());
+		canvas.widthProperty().bind(anchorPane.widthProperty());
+		canvas.heightProperty().bind(anchorPane.heightProperty());
 		canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
 				(MouseEvent event) -> {
 					graphicsContext.beginPath();
@@ -68,6 +68,10 @@ public class PaintController
 					graphicsContext.stroke();
 				});
 
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(0, 0, anchorPane.widthProperty().intValue(),
+				anchorPane.heightProperty().intValue());
+		//サイズ選択
 		sizeChooser.getSelectionModel().selectedIndexProperty()
 				.addListener((ChangeListener<Number>) (ov, old, newval) -> {
 					Number idx = (Number) newval;
@@ -110,7 +114,9 @@ public class PaintController
 		File file = fileChooser.showSaveDialog(stage);
 		if (file != null) {
 			try {
-				WritableImage writableImage = new WritableImage(500, 350);
+				WritableImage writableImage = new WritableImage(
+						anchorPane.widthProperty().intValue(),
+						anchorPane.heightProperty().intValue());
 				canvas.snapshot(null, writableImage);
 				BufferedImage bufferedImage = SwingFXUtils
 						.fromFXImage(writableImage, null);

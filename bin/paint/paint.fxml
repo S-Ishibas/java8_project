@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.collections.FXCollections ?>
 <?import java.lang.String ?>
-<?import paint.ResizableCanvas ?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0"
@@ -20,8 +20,12 @@
 	<children>
 		<BorderPane prefHeight="360.0" prefWidth="462.0">
 			<center>
-				<ResizableCanvas fx:id="canvas" height="324.0" width="508.0"
-					BorderPane.alignment="TOP_LEFT" />
+				<AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="200.0"
+					BorderPane.alignment="CENTER">
+					<children>
+						<Canvas fx:id="canvas" height="321.0" layoutY="2.0" width="400.0" />
+					</children>
+				</AnchorPane>
 			</center>
 			<top>
 				<HBox prefHeight="20.0" prefWidth="508.0" BorderPane.alignment="CENTER">
